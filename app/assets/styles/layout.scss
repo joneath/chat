@@ -112,6 +112,7 @@ body {
 
 .coversation-wrap {
   height: 100%;
+  width: 100%;
   position: absolute;
   visibility: hidden;
   background-color: #fff;
@@ -331,7 +332,13 @@ a {
   }
 }
 
-@keyframes bounce {
+.conversation-list {
+  @include calc(height, "100% - ", 102px);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@-webkit-keyframes bounceLeft {
    0% {
     opacity: .5;
    }
@@ -357,11 +364,6 @@ a {
    }
 }
 
-.conversation-list {
-  @include calc(height, "100% - ", 102px);
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-}
 .conversation-item {
   width: 100%;
   padding: 0 0 10px 66px;
@@ -388,9 +390,8 @@ a {
   }
   &.bounce {
     .thumb-wrap {
-      animation-name: bounce;
-      animation-duration: .7s;
-      animation-timing-function: ease;
+      animation: bounceLeft .7s;
+      -webkit-animation: bounceLeft .7s;
     }
   }
   &.group {
@@ -619,5 +620,32 @@ a {
   p {
     margin-top: 80px;
     text-align: center;
+  }
+}
+
+// Tablet and >
+@media only screen and (min-width: 750px) {
+  .compact {
+    .coversation-meta {
+      opacity: .35;
+    }
+  }
+  .toggle-menu {
+    display: none;
+  }
+  .content {
+    @include calc(width, "100% - ", 350px);
+  }
+  .conversations-wrap {
+    width: 350px;
+    @include calc(left, "100% - ", 350px);
+  }
+  .conversation-item {
+    &:hover {
+      .coversation-meta,
+      .thumb-wrap {
+        opacity: 1;
+      }
+    }
   }
 }
