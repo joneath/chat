@@ -217,7 +217,8 @@ $(function() {
       $('.conversations-wrap').toggleClass('editing');
   });
 
-  function showRemove() {
+  function showRemove(e) {
+    e.gesture.preventDefault();
     $('.conversation-item.show-remove').removeClass('show-remove');
     $(this).addClass('show-remove');
   }
@@ -227,7 +228,8 @@ $(function() {
   });
 
   var convWrap = $('.conversations-wrap').get(0);
-  Hammer(convWrap).on('swipeleft', function() {
+  Hammer(convWrap).on('swipeleft', function(e) {
+    e.gesture.preventDefault();
     var isCompact = $('.wrapper').hasClass('compact');
     var isSettings = $('.wrapper').hasClass('settings');
 
@@ -236,7 +238,8 @@ $(function() {
     }
   });
 
-  Hammer(convWrap).on('swiperight', function() {
+  Hammer(convWrap).on('swiperight', function(e) {
+    e.gesture.preventDefault();
     var isCompact = $('.wrapper').hasClass('compact');
     var isSettings = $('.wrapper').hasClass('settings');
 
